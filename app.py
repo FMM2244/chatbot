@@ -32,12 +32,13 @@ def ask():
     data = request.get_json()
     user_question = data.get('question', '')
     prompt = create_prompt(user_question, domain_42amman, domain_jordan)
+
     inputs = tokenizer(prompt, return_tensors='pt', max_length=105, truncation=True)
     outputs = model.generate(**inputs, max_length=150, pad_token_id=tokenizer.eos_token_id)
     answer = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    clean_answer = answer.replace(prompt, '').strip()
+    # clean_answer = answer.replace(prompt, '').strip()
 
-    return jsonify({'answer': clean_answer})
+    return jsonify({'answer': answer})
 
 domain_42amman = """
 Q: What is 42Amman?
@@ -149,8 +150,8 @@ def create_prompt(user_question, domain_42amman, domain_jordan):
         "You are an assistant that answers questions about either \"Jordan\" or \"42Amman.\"\n\n"
         f"Here is the user question:\n{user_question}\n\n"
         "Use the following information to generate a short, concise, and polite answer:\n\n"
-        f"Information about 42Amman:\n{domain_test}\n\n"
-        # f"Information about Jordan:\n{domain_jordan}\n\n"
+        f"Information about 42Amman:\n{domain_42amman}\n\n"
+        f"Information about Jordan:\n{domain_jordan}\n\n"
         "Please answer politely and keep it brief."
     )
     return prompt

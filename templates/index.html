@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Creative Chatbot</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
 
@@ -18,11 +18,27 @@
   <!-- Chatbot Section -->
   <div class="section" id="chatbot">
     <h2>Yalla ask🔥</h2>
-    <input type="text" placeholder="Type your question...">
-    <div class="response"></div>
+	<div class="input-wrapper">
+		<input type="text" id="question" placeholder="Type your question...">
+		<button onclick="ask()">Ask</button>
+	</div>
+    <p id="response"></p>
   </div>
 
   <script>
+	async function ask() {
+		alert("question sent");
+		const question = document.getElementById('question').value;
+		const response = await fetch('/ask', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ question }),
+		});
+		const data = await response.json();
+		document.getElementById('response').textContent = data.answer;
+		// console.log("Received answer:", data.answer);
+	}
+
     function startChat() {
       const landing = document.getElementById("landing");
       const chatbot = document.getElementById("chatbot");
@@ -34,6 +50,7 @@
         chatbot.classList.add("show");
       }, 800); // match transition time
     }
+    
   </script>
   
 </body>
