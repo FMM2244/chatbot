@@ -111,30 +111,30 @@ A: Jordan is relatively liberal, but modest clothing is appreciated, especially 
 def create_prompt(user_question, domain_42amman, domain_jordan):
     prompt = (
         "You are an assistant that answers questions about either \"Jordan\" or \"42Amman.\"\n\n"
-        f"Here is the user question:\n{user_question}\n\n"
-        "Use the following information to generate a short, concise, and polite answer:\n\n"
-        f"Information about 42Amman:\n{domain_42amman}\n\n"
-        f"Information about Jordan:\n{domain_jordan}\n\n"
-        "Please answer politely and keep it brief."
+        # f"Here is the user question:\n{user_question}\n\n"
+        # "Use the following information to generate a short, concise, and polite answer:\n\n"
+        # f"Information about 42Amman:\n{domain_42amman}\n\n"
+        # f"Information about Jordan:\n{domain_jordan}\n\n"
+        # "Please answer politely and keep it brief."
     )
     return prompt
 
 
-# @app.route('/')
-# def home():
-#     return render_template('index.html')
+@app.route('/')
+def home():
+    return render_template('index.html')
 
-# @app.route('/ask', methods=['POST'])
-# def ask():
-#     data = request.get_json()
-#     user_question = data.get('question', '')
-#     prompt = create_prompt(user_question, domain_42amman, domain_jordan)
+@app.route('/ask', methods=['POST'])
+def ask():
+    data = request.get_json()
+    user_question = data.get('question', '')
+    prompt = create_prompt(user_question, domain_42amman, domain_jordan)
 
-#     inputs = tokenizer(prompt, return_tensors='pt', max_length=1024, truncation=True)
-#     outputs = model.generate(**inputs, max_length=150, pad_token_id=tokenizer.eos_token_id)
-#     answer = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    inputs = tokenizer(prompt, return_tensors='pt', max_length=1024, truncation=True)
+    outputs = model.generate(**inputs, max_length=150, pad_token_id=tokenizer.eos_token_id)
+    answer = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
-#     return jsonify({'answer': answer})
+    return jsonify({'answer': answer})
 
-# if __name__ == '__main__':
-#     app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
