@@ -1,0 +1,65 @@
+ body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #3f51b5, #9c27b0);
+      font-family: 'Inter', sans-serif;
+      color: white;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .section {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.8s ease;
+    }
+
+    .section.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    h1, h2 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background: white;
+      color: #3f51b5;
+      padding: 14px 28px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ddd;
+    }
+
+    #chatbot input {
+     padding: 12px;
+  border-radius: 10px;
+  border: none;
+  width: 280px;
+  font-size: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: 0.3s ease;
+    }
+
+    #chatbot .response {
+      margin-top: 20px;
+      background: rgba(255,255,255,0.1);
+      padding: 12px;
+      border-radius: 8px;
+      max-width: 400px;
+    }
